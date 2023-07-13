@@ -1,5 +1,5 @@
 # example-percy-automate-selenium-python
-Example repo used by the Percy on Automate demonstrating Percy's Python on Automate integration with python using selenium.
+Example repo used by the Percy on Automate demonstrating Percy on Automate integration with python using selenium.
 
 ## Python on Automate Selenium Tutorial
 

@@ -18,7 +18,7 @@ def test_session(capability):
       width, height = 1280, 1024
       driver.set_window_size(width, height)
 
-      # go to the required webpage
+      # navigate to required website
       driver.get('https://bstackdemo.com/')
       WebDriverWait(driver, 10).until(EC.title_contains('StackDemo'))
 

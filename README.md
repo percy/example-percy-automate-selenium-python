@@ -105,7 +105,13 @@ On completion of the script, you would be able to see the your percy build. Sinc
 
 ### Step 5
 
-Without changing anything if you run the `after_test.py` script in tests, this would create few visual changes and would get compared to the last build and we would be able to see few diffs.
+Now in order to make comparisons happen we need to make changes to the existing website so that a visual change can occur you can go to following file in `test.py`
+
+```python 
+WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
+        (By.XPATH, '//*[@id="1"]/div[4]'))).click() # Say change id to 3
+```
+Or else just run `after_test.py`, we have already made visual changes in this script. If you run the `after_test.py` script in tests, this would create few visual changes and would get compared to the last build and we would be able to see few diffs.
 
 ``` shell
 $ npx percy exec -- python3 tests/after_test.py

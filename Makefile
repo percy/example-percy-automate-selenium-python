@@ -22,3 +22,9 @@ install: $(VENV)/$(MARKER)
 # npm: $(NPM)
 
 # install: npm venv
+
+test: 
+	npx percy app:exec -- $(VENV)/python3 after_tests/android.py
+
+after-test:
+	percy app:exec -- $(VENV)/python3 after_tests/ios.py

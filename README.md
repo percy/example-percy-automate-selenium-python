@@ -109,7 +109,9 @@ Now in order to make comparisons happen we need to make changes to the existing 
 
 ```python 
 WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
-        (By.XPATH, '//*[@id="1"]/div[4]'))).click() # Say change id to 3
+        (By.XPATH, '(//p[@class="shelf-item__title"])[3]'))).click() # Say change id to 2
+WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
+        (By.XPATH, '(//div[@class="shelf-item__buy-btn"])[3]'))).click() # Say change add to card id to 2
 ```
 Or else just run `after_test.py`, we have already made visual changes in this script. If you run the `after_test.py` script in tests, this would create few visual changes and would get compared to the last build and we would be able to see few diffs.
 

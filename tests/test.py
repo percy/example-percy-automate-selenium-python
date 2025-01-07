@@ -29,11 +29,7 @@ def test_session(capability):
       # [percy note: important step]
       # Percy Screenshot 1
       # take percy_screenshot using the following command
-      opts = {'sync': True}
-      res = percy_screenshot(driver, name = 'screenshot_1', options=opts)
-      print("response")
-      print(res)
-      
+      percy_screenshot(driver, name = 'screenshot_1')
 
       # Get text of current product
       item_on_page = WebDriverWait(driver, 10).until(

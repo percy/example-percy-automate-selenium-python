@@ -24,20 +24,24 @@ def test_session(capability):
 
       # click on the apple products
       WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
-         (By.XPATH, '//*[@id="__next"]/div/div/main/div[1]/div[1]/label/span'))).click()
+         (By.XPATH, '//span[normalize-space()="Apple"]'))).click()
 
       # [percy note: important step]
       # Percy Screenshot 1
       # take percy_screenshot using the following command
-      percy_screenshot(driver, name = 'screenshot_1')
+      opts = {'sync': True}
+      res = percy_screenshot(driver, name = 'screenshot_1', options=opts)
+      print("response")
+      print(res)
+      
 
       # Get text of current product
       item_on_page = WebDriverWait(driver, 10).until(
-        EC.visibility_of_element_located((By.XPATH, '//*[@id="1"]/p'))).text
+        EC.visibility_of_element_located((By.XPATH, '(//p[@class="shelf-item__title"])[3]'))).text
       
       # clicking on 'Add to cart' button
       WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
-        (By.XPATH, '//*[@id="1"]/div[4]'))).click()
+        (By.XPATH, '(//div[@class="shelf-item__buy-btn"])[3]'))).click()
       
       # Check if the Cart pane is visible
       WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
@@ -45,7 +49,7 @@ def test_session(capability):
 
       # Get text of product in cart
       item_in_cart = WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
-          (By.XPATH, '//*[@id="__next"]/div/div/div[2]/div[2]/div[2]/div/div[3]/p[1]'))).text
+          (By.XPATH, '(//p[@class="title"])[1]'))).text
       
       # [percy note: important step]
       # Percy Screenshot 2

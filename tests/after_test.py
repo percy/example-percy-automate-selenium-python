@@ -4,14 +4,20 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from percy import percy_screenshot
+from percy import percy_snapshot
 
 USER_NAME = os.environ.get("BROWSERSTACK_USERNAME", "BROWSERSTACK_USERNAME")
 ACCESS_KEY = os.environ.get("BROWSERSTACK_ACCESS_KEY", "BROWSERSTACK_ACCESS_KEY")
 
 def test_session(capability):
     # create an automate session by creating a remote webdriver
-    driver = webdriver.Remote("https://hub-cloud.browserstack.com/wd/hub", capability)
+    options = webdriver.ChromeOptions()
+    options.set_capability('bstack:options', capability['bstack:options'])
+    options.set_capability('browserName', capability['browserName'])
+    options.set_capability('browserVersion', capability['browserVersion'])
+    driver = webdriver.Remote(
+        command_executor=f"https://{USER_NAME}:{ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub",
+        options=options)
     try:
       # [percy note: important step] 
       # set the desired window size on which we want the screenshot
@@ -29,7 +35,7 @@ def test_session(capability):
       # [percy note: important step]
       # Percy Screenshot 1
       # take percy_screenshot using the following command
-      percy_screenshot(driver, name = 'screenshot_1')
+      percy_snapshot(driver, name = 'screenshot_1')
 
       # Get text of current product
       item_on_page = WebDriverWait(driver, 10).until(
@@ -50,7 +56,7 @@ def test_session(capability):
       # [percy note: important step]
       # Percy Screenshot 2
       # take percy_screenshot using the following command
-      percy_screenshot(driver, name = 'screenshot_2')
+      percy_snapshot(driver, name = 'screenshot_2')
 
       if item_on_page == item_in_cart:
           # Set the status of test as 'passed' if item is added to cart
@@ -61,7 +67,7 @@ def test_session(capability):
           driver.execute_script(
               'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "iPhone 12 not added to the cart!"}}')
     except Exception as e:
-       message = f'Error occured while executing script : {str(e.__class__)} {str(e.__msg__)}'
+       message = f'Error occurred while executing script : {str(e.__class__)} {str(e)}'
        print(message)
        driver.execute_script(
           'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": ' + json.dumps(message) + '}}')
@@ -71,19 +77,19 @@ def test_session(capability):
 
 if __name__ == "__main__":
    chrome_on_windows_11 = {
+    "browserName" : "Chrome",
+    "browserVersion" : "latest",
     'bstack:options' : {
       "os" : "Windows",
       "osVersion" : "11",
-      "browserVersion" : "latest",
       "projectName" : "My Project",
       "buildName" : "test percy_screenshot",
       "sessionName" : "BStack first_test",
       "local" : "false",
-      "seleniumVersion" : "3.14.0",
+      "seleniumVersion" : "4.0.0",
       "userName": USER_NAME,
-      "accessKey": ACCESS_KEY,
-    },
-    "browserName" : "Chrome",
+      "accessKey": ACCESS_KEY
+    }
   }
    
    capabilities_list = [chrome_on_windows_11]

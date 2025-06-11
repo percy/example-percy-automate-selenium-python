@@ -4,20 +4,14 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-from percy import percy_snapshot
+from percy import percy_screenshot
 
 USER_NAME = os.environ.get("BROWSERSTACK_USERNAME", "BROWSERSTACK_USERNAME")
 ACCESS_KEY = os.environ.get("BROWSERSTACK_ACCESS_KEY", "BROWSERSTACK_ACCESS_KEY")
 
 def test_session(capability):
     # create an automate session by creating a remote webdriver
-    options = webdriver.ChromeOptions()
-    options.set_capability('bstack:options', capability['bstack:options'])
-    options.set_capability('browserName', capability['browserName'])
-    options.set_capability('browserVersion', capability['browserVersion'])
-    driver = webdriver.Remote(
-        command_executor=f"https://{USER_NAME}:{ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub",
-        options=options)
+    driver = webdriver.Remote("https://hub-cloud.browserstack.com/wd/hub", capability)
     try:
       # [percy note: important step] 
       # set the desired window size on which we want the screenshot
@@ -35,7 +29,7 @@ def test_session(capability):
       # [percy note: important step]
       # Percy Screenshot 1
       # take percy_screenshot using the following command
-      percy_snapshot(driver, name = 'screenshot_1')
+      percy_screenshot(driver, name = 'screenshot_1')
 
       # Get text of current product
       item_on_page = WebDriverWait(driver, 10).until(
@@ -56,7 +50,7 @@ def test_session(capability):
       # [percy note: important step]
       # Percy Screenshot 2
       # take percy_screenshot using the following command
-      percy_snapshot(driver, name = 'screenshot_2')
+      percy_screenshot(driver, name = 'screenshot_2')
 
       if item_on_page == item_in_cart:
           # Set the status of test as 'passed' if item is added to cart

@@ -61,7 +61,7 @@ def test_session(capability):
           driver.execute_script(
               'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "iPhone 12 not added to the cart!"}}')
     except Exception as e:
-       message = f'Error occured while executing script : {str(e.__class__)} {str(e.__msg__)}'
+       message = f'Error occurred while executing script : {str(e.__class__)} {str(e)}'
        print(message)
        driver.execute_script(
           'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": ' + json.dumps(message) + '}}')
@@ -71,19 +71,19 @@ def test_session(capability):
 
 if __name__ == "__main__":
    chrome_on_windows_11 = {
+    "browserName" : "Chrome",
+    "browserVersion" : "latest",
     'bstack:options' : {
       "os" : "Windows",
       "osVersion" : "11",
-      "browserVersion" : "latest",
       "projectName" : "My Project",
       "buildName" : "test percy_screenshot",
       "sessionName" : "BStack first_test",
       "local" : "false",
-      "seleniumVersion" : "3.14.0",
+      "seleniumVersion" : "4.0.0",
       "userName": USER_NAME,
-      "accessKey": ACCESS_KEY,
-    },
-    "browserName" : "Chrome",
+      "accessKey": ACCESS_KEY
+    }
   }
    
    capabilities_list = [chrome_on_windows_11]

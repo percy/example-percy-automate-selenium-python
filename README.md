@@ -16,8 +16,7 @@ npm](https://nodejs.org/en/download/) and
 
 Clone the example application and install dependencies:
 
-Minimum required `@percy/cli` and `@percy/webdriver-utils` version is `1.27.4` for this to work correctly. If you already have `@percy/cli` or `@percy/webdriver-utils` installed please
-update it to latest or minium required version.
+Minimum required `@percy/cli` and `@percy/webdriver-utils` version is `1.27.4` for this to work correctly. This example has been updated to use `@percy/cli` ^1.31.2. If you already have `@percy/cli` or `@percy/webdriver-utils` installed please update them to the latest compatible versions.
 
 ```bash
 $ git clone https://github.com/percy/example-percy-automate-selenium-python.git

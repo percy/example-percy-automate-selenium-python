@@ -1,0 +1,76 @@
+# PER-8195 Phase 3 — Automate Selenium-Python matrix-row mapping.
+# Test code: tests/test_advanced.py (pytest).
+
+sdk: automate-selenium-python
+package: percy-selenium
+language: python
+mode: automate
+sdk_min_version: '2.1.2'
+cli_min_version: '1.31.13'
+
+rows:
+  - id: ignore_region_xpaths
+    state: covered
+    test: 'test_exercises_ignore_region_xpaths'
+  - id: ignore_region_selectors
+    state: covered
+    test: 'test_exercises_ignore_region_selectors'
+  - id: custom_ignore_regions
+    state: covered
+    test: 'test_exercises_custom_ignore_regions'
+  - id: consider_region_xpaths
+    state: covered
+    test: 'test_exercises_consider_region_xpaths'
+  - id: consider_region_selectors
+    state: covered
+    test: 'test_exercises_consider_region_selectors'
+  - id: freeze_animation
+    state: covered
+    test: 'test_exercises_freeze_animation'
+  - id: percy_css
+    state: covered
+    test: 'test_exercises_percy_css'
+  - id: sync
+    state: covered
+    test: 'test_exercises_sync_mode'
+  - id: test_case
+    state: covered
+    test: 'test_exercises_test_case_and_labels'
+  - id: labels
+    state: covered
+    test: 'test_exercises_test_case_and_labels'
+
+  - id: build_metadata_via_env
+    state: covered
+  - id: env_percy_branch
+    state: covered
+  - id: env_percy_commit
+    state: covered
+
+  - id: widths
+    state: n_a
+  - id: min_height
+    state: n_a
+  - id: enable_javascript
+    state: n_a
+  - id: scope
+    state: n_a
+  - id: discovery
+    state: n_a
+  - id: dom_transformation
+    state: n_a
+  - id: responsive_snapshot_capture
+    state: n_a
+  - id: readiness_preset
+    state: n_a
+  - id: device_pixel_ratio
+    state: n_a
+  - id: browsers
+    state: n_a
+  - id: regions
+    state: n_a
+
+  - id: percy_yml_global_config
+    state: covered
+  - id: environment_info_reporting
+    state: covered

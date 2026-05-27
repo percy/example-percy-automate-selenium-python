@@ -1,5 +1,8 @@
 # PER-8195 Phase 3 — Automate Selenium-Python matrix-row mapping.
 # Test code: tests/test_advanced.py (pytest).
+# Build metadata is driven by BROWSERSTACK_PROJECT_NAME / BROWSERSTACK_BUILD_NAME
+# env vars (feed the BrowserStack projectName/buildName caps in conftest.py);
+# these were previously the misleadingly-named PERCY_PROJECT / PERCY_BUILD.
 
 sdk: automate-selenium-python
 package: percy-selenium

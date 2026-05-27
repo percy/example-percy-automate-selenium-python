@@ -63,7 +63,11 @@ def test_exercises_percy_css(driver):
 
 
 def test_exercises_sync_mode(driver):
-    percy_screenshot(driver, name="BStackDemo — sync", sync=True)
+    # sync=True blocks until Percy finishes the comparison and returns the result,
+    # so we can consume it inline instead of polling the build separately.
+    result = percy_screenshot(driver, name="BStackDemo — sync", sync=True)
+    print(f"Percy sync comparison result: {result}")
+    assert result is not None
 
 
 def test_exercises_test_case_and_labels(driver):

@@ -11,8 +11,8 @@ $(VENV)/.deps: requirements.txt | $(VENV)
 	$(VENV)/pip install -r requirements.txt
 	touch $(VENV)/.deps
 
-$(NPM):
-	npm install --no-save @percy/cli@^1.31.13
+$(NPM): package.json
+	npm install
 
 install: $(VENV)/.deps $(NPM)
 
